@@ -1,12 +1,30 @@
 <template>
   <div id="app">
+     <navBar ></navBar>  
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
     </div>
     <router-view/>
   </div>
 </template>
+<script>
+import navBar from '@/components/NavBar'
+export default {
+  components : {
+    navBar
+  },
+  data(){
+    return {
+      
+    }
+  },
+  computed:{
+    isUser(){
+      return this.$store.state.user
+    }
+  }
+}
+</script>
+
 
 <style>
 #app {
