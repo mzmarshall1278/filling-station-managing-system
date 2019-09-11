@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-     <navBar ></navBar>  
-    <div id="nav">
-    </div>
+     <navBar></navBar>  
+    
     <router-view/>
   </div>
 </template>
-<script>
+<script> 
 import navBar from '@/components/NavBar'
 export default {
   components : {
@@ -31,7 +30,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+ 
   color: #2c3e50;
 }
 #nav {

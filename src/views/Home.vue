@@ -1,6 +1,8 @@
 <template>
-  <div class="home">
-    
+  <div class="container">
+    <b-card class="mt-3">
+
+    </b-card>    
   </div>
 </template>
 
@@ -12,6 +14,11 @@ export default {
   name: 'home',
   components: {
  //   HelloWorld
+  },
+  data(){
+    return {
+      
+    }
   }
 }
 </script>

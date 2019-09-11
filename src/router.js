@@ -3,6 +3,11 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login'
 import CreateAccount from './views/CreateAccount'
+import Pumps from './views/Pumps'
+import Head from './views/Head'
+import Staffs from './views/Staffs'
+import SingleStaff from './views/SingleStaff'
+
 
 Vue.use(Router)
 
@@ -11,15 +16,38 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      name: 'login',
+      component: Login
+    },
+    {
       path: '/home',
       name: 'home',
       component: Home
     },
     {
-      path: '/',
-      name: 'login',
-      component: Login
+      path: '/pumps',
+      name: 'pumps',
+      component: Pumps,
     },
+    {
+      path: '/pumps/head/:id/:name',
+      name: 'head',
+      component: Head,
+      props : true
+    },
+    {
+      path: '/staffs',
+      name: 'staff',
+      component: Staffs,
+    },
+    {
+      path: '/staffs/:id',
+      name: 'single-staff',
+      component: SingleStaff,
+      props : true
+    },
+    
     {
       path: '/auth/createAccount',
       name: 'CreateAccount',
