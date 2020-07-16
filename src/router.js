@@ -7,7 +7,10 @@ import Pumps from './views/Pumps'
 import Head from './views/Head'
 import Staffs from './views/Staffs'
 import SingleStaff from './views/SingleStaff'
-
+import Sessions from './views/Sessions'
+import NewStaff from './views/NewStaff'
+import Operation from './views/Operation'
+import Profile from './views/Profile'
 
 Vue.use(Router)
 
@@ -42,24 +45,36 @@ export default new Router({
       component: Staffs,
     },
     {
+      path: '/staffs/new',
+      name: 'new-staff',
+      component: NewStaff
+    },
+    {
       path: '/staffs/:id',
       name: 'single-staff',
       component: SingleStaff,
       props : true
     },
-    
+    {
+      path: '/sessions',
+      name: 'sessions',
+      component: Sessions,
+    },
+    {
+      path: '/operation',
+      name: 'operation',
+      component: Operation,
+    },
     {
       path: '/auth/createAccount',
       name: 'CreateAccount',
       component: CreateAccount
     },
+    
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/profile',
+      name: 'profile',
+      component: Profile
     }
   ]
 })

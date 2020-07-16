@@ -1,29 +1,33 @@
 <template>
-    <div class="container mt-3">
-       <div>
-        <b-card-group deck v-for="(pump, key) in  pumps" :key="key" class="mt-3">
-        <b-card bg-variant="info" text-variant="white"  class="text-center" v-for="(head, key) in  pump.heads" :key="key" :header="pump.number" @click="loadHead(pump.id, head.name)" style="cursor:pointer">
-            <b-card-text>Head {{head.name}}</b-card-text>
-        </b-card>
 
-        
-        </b-card-group>
-        
-            <b-card-group deck class="mt-3 col-md-8 mx-auto">
-            <b-card bg-variant="info " text-variant="white"  class="text-center" header="Add Pump" @click="addPump(++pumps.length)" style="cursor:pointer">
-                <b-card-text></b-card-text>
-            </b-card>
-        
-        </b-card-group>
-      </div>
-        
-    </div> 
+    <div class="container">
+        <h3 class="text-center mt-3">Pumps</h3>
+        <b-card>
+            <b-card-group class="row" v-for="(pump, key) in pumps" :key="key">
+                
+                <b-card v-for="(head,key) in heads" :key="key" class="text-center m-1"  bg-variant="info" style="color:snow; cursor:pointer" @click="loadHead(pump.id,head.name)">
+                    <h5>Pump : {{pump.number}}</h5>
+                    <h4>Head : {{head.name}}</h4>
+                    </b-card>
+            </b-card-group>
+
+             <b-card-group class="row">
+                
+                <b-card class="text-center m-1 col-md-6 mx-auto"  bg-variant="info" style="color:snow; cursor:pointer">
+                    <h5 @click="showModal">Add Pump</h5>
+                    
+                    </b-card>
+            </b-card-group>
+        </b-card>
+    </div>
 </template>
 <script>
 export default {
     data(){
         return {
-
+            heads : [
+                {name : "A"}, {name : "B"},
+            ]
         }
     },
     computed : {
@@ -31,32 +35,28 @@ export default {
             return this.$store.state.pumps
         }
     },
-    methods: {
-        loadHead(id, name){
-            this.$router.push('/pumps/head/'+ id+'/'+name)
+   
+    methods : {
+        showModal(){
+        this.$bvModal.msgBoxConfirm('Are you sure you want to add a new pump??', {
+            okTitle : "yes",
+            okVariant: 'info',
+            cancelTitle: "NO",
+            cancelVariant: 'danger',
+            centered : true
+        }).then(
+            value => {
+                if(value) this.addPump()
+            }
+        ).catch(err => alert(err))
         },
-        addPump(l){
-            //console.log(l)
-            this.$store.dispatch('addPump', l)
+        loadHead(id,name){
+            this.$router.push('/pumps/head/'+id+'/'+name)
+        },
+        addPump(){
+            
+          this.$store.dispatch('addPump')  
         }
     }
 }
 </script>
-<style scoped>
-    .pump{
-        display: block;
-        max-width: 80%;
-        background: cyan;
-        color : midnightblue;
-        margin: auto
-    }
-    .head {
-        display: inline-block;
-        margin : 3px 8px;
-        padding: 5px;
-        border: 2px solid black;
-        border-radius: 8px;
-
-    }
-</style>
-

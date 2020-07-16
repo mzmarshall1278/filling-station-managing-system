@@ -6,20 +6,22 @@
         <b-form-group id="input-group-2" label="User Name:" label-for="input-2">
           <b-form-input
             id="input-2"
+            type="email"
             v-model="form.name"
             required
-            placeholder="Enter name"
+            placeholder="Enter Email"
           ></b-form-input>
          
       </b-form-group>
       </b-col>
       <b-col sm="7" class="m-auto">
-        <b-form-group id="input-group-2" label="Password:" label-for="input-2">
+        <b-form-group id="input-group" label="Password:" label-for="input-2">
               <b-form-input 
-                id="input-2"
-                v-model="form.name"
+              type="password"
+                id="input"
+                v-model="form.password"
                 required
-                placeholder="Enter name"
+                placeholder="Enter Password"
               ></b-form-input>
             </b-form-group>
       </b-col>
@@ -41,19 +43,25 @@
     data() {
       return {
         form: {
-          email: '',
           name: '',
-          food: null,
-          checked: []
+          password:'',
+          
         },
-        foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-        show: true
+              }
+    },
+    computed:{
+      user(){
+        return this.$store.state.user
+      }
+    },
+    watch:{
+      user(val){
+        if(val !== null && val !== undefined) this.$router.push('/home')
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
+      onSubmit() {
+        this.$store.dispatch('login', {name: this.form.name, password: this.form.password})
       },
       redirect(){
         this.$router.push('/auth/createAccount')
